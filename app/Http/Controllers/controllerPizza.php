@@ -12,7 +12,7 @@ class controllerPizza extends Controller
      */
     public function index()
     {
-        $pizzas = pizzaa::all(); 
+        $pizzas = Pizzaa::all(); 
         return view('pizzas', compact('pizzas'));
     }
 
@@ -21,7 +21,7 @@ class controllerPizza extends Controller
      */
     public function create()
     {
-        //
+        return view('nuevaPizza');
     }
 
     /**
@@ -29,7 +29,15 @@ class controllerPizza extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
+
+        Pizzaa::create($request->all());
+
+        return redirect()->route('pizzas.index')->with('success', 'Pizza agregada correctamente');
     }
 
     /**

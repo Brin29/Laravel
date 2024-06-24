@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\controllerPizza;
-use App\Models\pizzaa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +18,4 @@ Route::get('/', function () {
     return view('layout');
 });
 
-Route::resource("pizzas", pizzaa::class);
+Route::resource("pizzas", controllerPizza::class);

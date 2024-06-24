@@ -9,4 +9,5 @@ class pizzaa extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'description', 'price'];
+    protected $table = 'pizzas';
 }

@@ -1,13 +1,15 @@
-@extends("layout")
-@section("contenido")
-  <div class="container">
-    <div class="row">
-      <div class="col-mt-3 mb-3"><a href="{{ route('pizzas.create') }}" class="btn btn-primary">Crear nueva pizza</a></div>
+@extends('layout')
+@section('contenido')
+<div class="container">
+  <div class="row">
+    <div class="col mt-3 mb-3">
+      <a href="{{ route('pizzas.create') }}" class="btn btn-primary">Crear nueva pizza</a>
     </div>
   </div>
-  <div class="container">
+  </div>
+<div class="container">
     <div class="row">
-      @if($message = Session::get('succes'))
+      @if($message = Session::get('success'))
       <div class="alert alert-success" role="alert">
         {{ $message }}
       </div>
@@ -15,6 +17,7 @@
       @if($message = Session::get('alert'))
       <div class="alert alert-warning" role="alert">
         {{ $message }}
+      </div>
       @endif
       <table class="table">
         <thead class="thead-dark">
@@ -30,11 +33,11 @@
           @foreach($pizzas as $key => $pizza)
             <tr>
               <th scope="row">{{$key}}</th>
-              <td>{{ $pizzas->name }}</td>
-              <td>{{ $pizzas->description }}</td>
-              <td>{{ $pizzas->price }}</td>
+              <td>{{ $pizza->name }}</td>
+              <td>{{ $pizza->description }}</td>
+              <td>{{ $pizza->price }}</td>
               <td>
-               <a href="{{ route('pizzas.show'), $pizza->id}}" class="btn btn-info">Mostrar</a>
+               <a href="{{ route('pizzas.show', $pizza->id)}}" class="btn btn-info">Mostrar</a>
                 <a href="{{ route('pizzas.edit', $pizza->id) }}" class="btn btn-info">Editar</a>
                 <form action="{{ route('pizzas.destroy', $pizza->id) }}" method="POST">
                   @csrf
@@ -48,5 +51,4 @@
       </table>
       </div>
     </div>
-  </div>
   @endsection
