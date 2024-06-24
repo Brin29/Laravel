@@ -5,7 +5,7 @@
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <form action="{{'route(pizzas.update', $pizza->id )}}" method="post">
+            <form action="{{route('pizzas.update', $pizza->id )}}" method="post">
               @csrf
               @method('PUT')
               <h5>Editar Pizza</h5>
@@ -36,3 +36,4 @@
       </div>
     </div>
   </div>
+  @endsection

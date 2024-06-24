@@ -43,32 +43,42 @@ class controllerPizza extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pizzaa $pizzaa)
+    public function show(Pizzaa $pizza)
     {
-        //
+        return view('mostrarPizza', compact('pizza'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(pizzaa $pizzaa)
+    public function edit(pizzaa $pizza)
     {
-        //
+        return view('editarPizza', compact('pizza'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pizzaa $pizzaa)
+    public function update(Request $request, pizzaa $pizza)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
+
+        $pizza->update($request->all());
+
+        return redirect()->route('pizzas.index')->with('success', 'Pizza actualizada correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pizzaa $pizzaa)
+    public function destroy(pizzaa $pizza)
     {
-        //
+        $pizza->delete();
+
+        return redirect()->route('pizzas.index')->with('alert', 'Pizza eliminada correctamente');
     }
 }
